@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Application\User\Action;
+namespace App\Application\User\Assert;
 
 use App\Application\User\Domain\Exception\UserAlreadyExistsException;
 use App\Application\User\Domain\Repository\UserRepositoryInterface;
 
-final readonly class AssertUserNotExistsByEmailAction
+final readonly class UserNotExistsByEmailAssert
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,

@@ -22,5 +22,22 @@ services:
     # For normalize Request objects
     Symfony\Component\Serializer\Normalizer\ObjectNormalizer: ~
 
+    App\Infrastructure\Console\Command\MakePolicyCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+
+    App\Infrastructure\Security\JwtGenerator:
+        arguments:
+            $secret: '%env(string:JWT_SECRET)%'
+            $ttl: '%env(int:JWT_TTL)%'
+
+    App\Infrastructure\Security\JwtDecoder:
+        arguments:
+            $secret: '%env(string:JWT_SECRET)%'
+
+    App\Presentation\Http\Resolver\CurrentUserValueResolver:
+        tags:
+            - { name: controller.argument_value_resolver, priority: 200 }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

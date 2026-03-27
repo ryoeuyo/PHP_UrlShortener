@@ -2,13 +2,13 @@
 
 namespace App\Application\User\UseCase;
 
-use App\Application\Common\Domain\Service\UuidGeneratorInterface;
-use App\Application\User\Action\AssertUserNotExistsByEmailAction;
+use App\Application\Common\Domain\Security\PasswordHasherInterface;
+use App\Application\Common\Domain\Security\UuidGeneratorInterface;
+use App\Application\User\Assert\UserNotExistsByEmailAssert;
 use App\Application\User\Domain\Entity\User;
 use App\Application\User\Domain\Repository\UserRepositoryInterface;
 use App\Application\User\Domain\Request\RegisterRequest;
 use App\Application\User\Domain\Response\UserCreatedResponse;
-use App\Application\User\Domain\Service\PasswordHasherInterface;
 
 final readonly class RegisterUserUseCase
 {
@@ -16,7 +16,7 @@ final readonly class RegisterUserUseCase
         private UserRepositoryInterface $userRepository,
         private UuidGeneratorInterface $uuidGenerator,
         private PasswordHasherInterface $passwordHasher,
-        private AssertUserNotExistsByEmailAction $assertUserNotExistsByEmailAction,
+        private UserNotExistsByEmailAssert $assertUserNotExistsByEmailAction,
     ) {
     }
 
@@ -25,7 +25,7 @@ final readonly class RegisterUserUseCase
         $this->assertUserNotExistsByEmailAction->run($request->email);
 
         $user = new User(
-            uuid: $this->uuidGenerator->generate(),
+            id: $this->uuidGenerator->generate(),
             email: $request->email,
             password: $this->passwordHasher->hash($request->password),
         );

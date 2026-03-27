@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Application\User\Action;
+namespace App\Application\User\Assert;
 
+use App\Application\Common\Domain\Security\PasswordHasherInterface;
 use App\Application\User\Domain\Entity\User;
 use App\Application\User\Domain\Exception\InvalidCredentials;
-use App\Application\User\Domain\Service\PasswordHasherInterface;
 
-final readonly class AssertUserPasswordAction
+final readonly class UserPasswordAssert
 {
     public function __construct(
         private PasswordHasherInterface $hasher,
@@ -15,7 +15,7 @@ final readonly class AssertUserPasswordAction
 
     public function run(User $user, string $plainPassword): void
     {
-        if ($this->hasher->compare($user->password, $plainPassword) === false) {
+        if ($this->hasher->compare($plainPassword, $user->password) === false) {
             throw new InvalidCredentials();
         }
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Common\Domain\Service;
+namespace App\Application\Common\Domain\Security;
 
 interface UuidGeneratorInterface
 {
