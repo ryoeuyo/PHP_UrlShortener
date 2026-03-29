@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Security;
+namespace App\Infrastructure\Security\Hashing;
 
 use App\Application\Common\Domain\Security\PasswordHasherInterface;
 

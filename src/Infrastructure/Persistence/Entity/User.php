@@ -7,7 +7,7 @@ use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'users')]
-final class User
+class User
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]

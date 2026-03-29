@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Security;
+namespace App\Infrastructure\Security\Token;
 
 use App\Application\Common\Domain\Exception\UnauthorizedException;
 use App\Application\Common\Domain\Security\TokenDecoderInterface;

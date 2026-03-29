@@ -3,8 +3,8 @@
 namespace App\Presentation\Http\Resolver;
 
 use App\Application\User\Domain\Entity\User;
+use App\Infrastructure\Security\Action\GetUserFromTokenAction;
 use App\Infrastructure\Security\Attribute\CurrentUser;
-use App\Presentation\Http\Action\GetUserFromTokenAction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;

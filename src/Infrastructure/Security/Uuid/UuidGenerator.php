@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Security;
+namespace App\Infrastructure\Security\Uuid;
 
 use App\Application\Common\Domain\Security\UuidGeneratorInterface;
 use Ramsey\Uuid\Uuid;

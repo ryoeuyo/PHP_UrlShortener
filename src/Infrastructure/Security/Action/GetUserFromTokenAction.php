@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Presentation\Http\Action;
+namespace App\Infrastructure\Security\Action;
 
 use App\Application\Common\Domain\Security\TokenDecoderInterface;
 use App\Application\User\Domain\Entity\User;

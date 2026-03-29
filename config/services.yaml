@@ -1,37 +1,25 @@
-# yaml-language-server: $schema=../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
-
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-# See also https://symfony.com/doc/current/service_container/import.html
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
 
-    # For normalize Request objects
     Symfony\Component\Serializer\Normalizer\ObjectNormalizer: ~
 
     App\Infrastructure\Console\Command\MakePolicyCommand:
         arguments:
             $projectDir: '%kernel.project_dir%'
 
-    App\Infrastructure\Security\JwtGenerator:
+    App\Infrastructure\Security\Token\JwtGenerator:
         arguments:
             $secret: '%env(string:JWT_SECRET)%'
             $ttl: '%env(int:JWT_TTL)%'
 
-    App\Infrastructure\Security\JwtDecoder:
+    App\Infrastructure\Security\Token\JwtDecoder:
         arguments:
             $secret: '%env(string:JWT_SECRET)%'
 
@@ -39,5 +27,9 @@ services:
         tags:
             - { name: controller.argument_value_resolver, priority: 200 }
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Infrastructure\Common\Library\Serializer\StringValueObjectDenormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    App\Application\ShortenUrl\Action\GenerateUniqueAliasAction:
+        arguments:
+            $length: 5
