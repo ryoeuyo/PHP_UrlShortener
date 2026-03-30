@@ -1,6 +1,12 @@
 includes:
 	- phpstan-baseline.neon
 
+services:
+    -
+        class: App\Tests\Architecture\ArchitectureTest
+        tags:
+            - phpat.test
+
 parameters:
     level: 7
     paths:

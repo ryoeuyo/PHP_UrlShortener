@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Console\Command;
 
-use App\Infrastructure\Common\Library\Render\TemplateRenderer;
+use App\Infrastructure\Common\Library\Render\TemplateRendererInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -14,7 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
 final class MakePolicyCommand extends Command
 {
     public function __construct(
-        private readonly TemplateRenderer $renderer,
+        private readonly TemplateRendererInterface $renderer,
         private readonly Filesystem $fs,
         private readonly string $projectDir,
     ) {

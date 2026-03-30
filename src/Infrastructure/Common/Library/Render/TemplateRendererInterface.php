@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Common\Library\Render;
 
-interface TemplateRenderer
+interface TemplateRendererInterface
 {
     /**
      * @param array<string, mixed> $parameters
