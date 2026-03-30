@@ -8,13 +8,21 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class StringValueObjectDenormalizer implements DenormalizerInterface
 {
-    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
-    {
+    public function supportsDenormalization(
+        mixed $data,
+        string $type,
+        ?string $format = null,
+        array $context = [],
+    ): bool {
         return is_a($type, StringValueObjectInterface::class, true);
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): object
-    {
+    public function denormalize(
+        mixed $data,
+        string $type,
+        ?string $format = null,
+        array $context = [],
+    ): object {
         if (is_array($data) && array_key_exists('value', $data)) {
             $data = $data['value'];
         }

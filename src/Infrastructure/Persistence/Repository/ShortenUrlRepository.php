@@ -20,7 +20,7 @@ final class ShortenUrlRepository extends ServiceEntityRepository implements Shor
 
     public function __construct(
         ManagerRegistry $registry,
-        private readonly ShortenurlMapper $mapper,
+        private readonly ShortenUrlMapper $mapper,
     ) {
         parent::__construct($registry, DoctrineShortenUrl::class);
         $this->entityManager = $this->getEntityManager();

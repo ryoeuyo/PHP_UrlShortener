@@ -12,7 +12,7 @@ final readonly class GenerateUniqueAliasAction
     private const GENERATE_ALIAS_TRIES = 5;
 
     public function __construct(
-        private string $length,
+        private int $length,
         private ShortenUrlNotExistsByAliasAssert $shortenUrlNotExistsByAliasAssert
     ) {
     }

@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Console\Command;
 
+use App\Infrastructure\Common\Library\Render\TemplateRenderer;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,6 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
 final class MakePolicyCommand extends Command
 {
     public function __construct(
+        private readonly TemplateRenderer $renderer,
         private readonly Filesystem $fs,
         private readonly string $projectDir,
     ) {
@@ -45,66 +47,14 @@ final class MakePolicyCommand extends Command
         }
 
         $this->fs->mkdir($path);
-        $content = $this->generatePolicy($entity, $policy);
+        $content = $this->renderer->render('policy.stub.tpl', [
+            'entity' => $entity,
+            'policy' => $policy,
+        ]);
 
         $this->fs->dumpFile($filePath, $content);
         $output->writeln("<info>Policy created: $filePath</info>");
 
         return Command::SUCCESS;
-    }
-
-    private function generatePolicy(string $entity, string $policy): string
-    {
-        return <<<PHP
-<?php
-
-declare(strict_types=1);
-
-namespace App\\Application\\$entity\\Domain\\Policy;
-
-use Application\\Common\\Domain\\Exception\\ForbiddenActionException;
-use Application\\EventManagement\\Common\\Domain\\Enum\\PolicyAction;
-use Application\\EventManagement\\Common\\Domain\\Security\\AuthorizationContext;
-
-final readonly class $policy
-{
-    public function assert(AuthorizationContext \$ctx, PolicyAction \$action): void
-    {
-        if (\$this->can(\$ctx, \$action) === false) {
-            throw new ForbiddenActionException();
-        }
-    }
-
-    private function can(AuthorizationContext \$ctx, PolicyAction \$action): bool
-    {
-        return match (\$action) {
-            PolicyAction::View => \$this->canView(\$ctx),
-            PolicyAction::Edit => \$this->canEdit(\$ctx),
-            PolicyAction::Delete => \$this->canDelete(\$ctx),
-            PolicyAction::Create => \$this->canCreate(\$ctx),
-        };
-    }
-
-    private function canView(AuthorizationContext \$ctx): bool
-    {
-        return false;
-    }
-
-    private function canEdit(AuthorizationContext \$ctx): bool
-    {
-        return false;
-    }
-
-    private function canDelete(AuthorizationContext \$ctx): bool
-    {
-        return false;
-    }
-
-    private function canCreate(AuthorizationContext \$ctx): bool
-    {
-        return false;
-    }
-}
-PHP;
     }
 }

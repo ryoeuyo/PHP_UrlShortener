@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Application\User\Domain\Policy;
+namespace App\Application\{{ entity }}\Domain\Policy;
 
-use Application\Common\Domain\Exception\ForbiddenActionException;
-use Application\EventManagement\Common\Domain\Enum\PolicyAction;
-use Application\EventManagement\Common\Domain\Security\AuthorizationContext;
+use App\Application\Common\Domain\Exception\ForbiddenActionException;
+use App\Application\Common\Domain\Enum\PolicyAction;
+use App\Application\Common\Domain\Security\AuthorizationContext;
 
-final readonly class UserPolicy
+final readonly class {{ policy }}
 {
     public function assert(AuthorizationContext $ctx, PolicyAction $action): void
     {
@@ -32,17 +32,17 @@ final readonly class UserPolicy
         return false;
     }
 
-    private function canEdit(AuthorizationContext $ctx): bool
+        private function canEdit(AuthorizationContext $ctx): bool
     {
         return false;
     }
 
-    private function canDelete(AuthorizationContext $ctx): bool
+        private function canDelete(AuthorizationContext $ctx): bool
     {
         return false;
     }
 
-    private function canCreate(AuthorizationContext $ctx): bool
+        private function canCreate(AuthorizationContext $ctx): bool
     {
         return false;
     }
