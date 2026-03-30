@@ -11,7 +11,7 @@ final readonly class Url implements StringValueObjectInterface
     {
     }
 
-    public static function fromString(string $value): StringValueObjectInterface
+    public static function fromString(string $value): self
     {
         if (filter_var($value, FILTER_VALIDATE_URL) === false) {
             throw new InvalidArgumentException("Invalid URL");

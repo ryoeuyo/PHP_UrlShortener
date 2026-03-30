@@ -20,3 +20,7 @@
 .idea
 .editorconfig
 .local_http_tests
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
