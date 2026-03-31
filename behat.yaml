@@ -1,0 +1,14 @@
+default:
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+            kernel:
+                class: App\Kernel
+    suites:
+        default:
+            paths:
+                - tests/Behat/Features
+            contexts:
+                - Tests\Behat\Context\ApiContext
+
+    autoload:
+        '': tests/Behat

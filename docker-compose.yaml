@@ -40,6 +40,21 @@ services:
     networks:
       - symfony
 
+  db_test:
+      image: postgres:15-alpine
+      container_name: symfony_postgres_test
+      environment:
+          POSTGRES_USER: symfony
+          POSTGRES_PASSWORD: symfony
+          POSTGRES_DB: test_db
+      ports:
+          - "5433:5432"
+      volumes:
+          - db_test_data:/var/lib/postgresql/data
+          - ./docker/db/init_test:/docker-entrypoint-initdb.d
+      networks:
+          - symfony
+
 volumes:
   db_data:
 

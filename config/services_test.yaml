@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Tests\Behat\:
+        resource: 'Tests\Behat\Context\*'
+        tags: ['behat.context']
+
+    Tests\Behat\Helper\ScenarioState:
+        public: true
+
+    Tests\Behat\Context\ApiContext:
+        public: true
+        arguments:
+            $state: '@Tests\Behat\Helper\ScenarioState'
