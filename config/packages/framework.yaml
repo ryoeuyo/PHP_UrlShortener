@@ -8,6 +8,8 @@ framework:
     #esi: true
     #fragments: true
 
+    error_controller: App\Presentation\Common\Controller\JsonErrorController
+
 when@test:
     framework:
         test: true
