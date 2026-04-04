@@ -6,20 +6,23 @@ use Behat\Behat\Context\Context;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Uid\Uuid;
+use Tests\Behat\Exception\TestFailException;
 use Tests\Behat\State\ScenarioState;
 
-final class ApiContext extends WebTestCase implements Context
+class ApiContext implements Context
 {
     private const CONTENT_TYPE = 'application/json';
     private const HTTP_ACCEPT = 'application/json';
 
     private KernelBrowser $client;
 
-    public function __construct(private readonly ScenarioState $state)
-    {
-        $this->client = self::createClient();
+    public function __construct(
+        private readonly ScenarioState $state,
+        KernelInterface $kernel,
+    ) {
+        $this->client = new KernelBrowser($kernel);
     }
 
     #[When('я отправляю :method запрос на :uri с JSON:')]
@@ -96,5 +99,10 @@ final class ApiContext extends WebTestCase implements Context
                 $actual
             ));
         }
+    }
+
+    protected function fail(string $message): never
+    {
+        throw new TestFailException($message);
     }
 }

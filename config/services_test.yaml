@@ -7,10 +7,10 @@ services:
         resource: 'Tests\Behat\Context\*'
         tags: ['behat.context']
 
-    Tests\Behat\Helper\ScenarioState:
+    Tests\Behat\State\ScenarioState:
         public: true
 
     Tests\Behat\Context\ApiContext:
         public: true
         arguments:
-            $state: '@Tests\Behat\Helper\ScenarioState'
+            $state: '@Tests\Behat\State\ScenarioState'
