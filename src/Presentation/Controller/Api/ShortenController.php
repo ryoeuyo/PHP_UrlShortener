@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Presentation\Controller;
+namespace App\Presentation\Controller\Api;
 
 use App\Application\ShortenUrl\Domain\Request\CreateShortenUrlRequest;
 use App\Application\ShortenUrl\UseCase\CreateShortenUrlUseCase;
@@ -8,6 +8,7 @@ use App\Application\User\Domain\Entity\User;
 use App\Infrastructure\Security\Attribute\CurrentUser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
@@ -24,6 +25,6 @@ final class ShortenController extends AbstractController
     ): JsonResponse {
         $response = $uc->run($request, $user);
 
-        return $this->json($response);
+        return $this->json($response, Response::HTTP_CREATED);
     }
 }

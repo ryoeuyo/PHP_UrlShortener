@@ -5,7 +5,7 @@ namespace App\Infrastructure\Common\Library\Render;
 use RuntimeException;
 use Symfony\Component\Filesystem\Filesystem;
 
-final readonly class StubRendererInterface implements TemplateRendererInterface
+final readonly class StubRenderer implements TemplateRendererInterface
 {
     public function __construct(
         private Filesystem $fs,

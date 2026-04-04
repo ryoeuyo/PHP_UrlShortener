@@ -20,7 +20,7 @@ final readonly class GetUserFromTokenAction
     {
         $header = $request->headers->get('Authorization');
         if (!$header || !str_starts_with($header, 'Bearer ')) {
-            throw new UnauthorizedHttpException('Bearer', 'Missing bearer token');
+            $this->throwUnauthorizedHttpExceptionWithBearerChallenge('Missing bearer token');
         }
 
         $token = substr($header, 7);
@@ -28,14 +28,23 @@ final readonly class GetUserFromTokenAction
 
         $uid = $payload['uid'] ?? null;
         if (!$uid) {
-            throw new UnauthorizedHttpException('Bearer', 'Token does not contain uid');
+            $this->throwUnauthorizedHttpExceptionWithBearerChallenge('Token does not contain uid');
         }
 
         $user = $this->userRepository->findById($uid);
         if (!$user) {
-            throw new UnauthorizedHttpException('Bearer', 'User not found');
+            $this->throwUnauthorizedHttpExceptionWithBearerChallenge('User not found');
         }
 
         return $user;
+    }
+
+    private function throwUnauthorizedHttpExceptionWithBearerChallenge(string $message): never
+    {
+        throw new UnauthorizedHttpException(
+            challenge: 'Bearer',
+            message: $message,
+            code: 401
+        );
     }
 }

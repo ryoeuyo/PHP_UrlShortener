@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Presentation\Controller;
+namespace App\Presentation\Controller\Api;
 
 use App\Application\User\Domain\Entity\User;
 use App\Application\User\Domain\Response\UserResponse;
