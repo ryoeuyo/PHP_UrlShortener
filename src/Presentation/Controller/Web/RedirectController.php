@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Presentation\Controller\Api;
+namespace App\Presentation\Controller\Web;
 
 use App\Application\ShortenUrl\UseCase\GetOriginalUrlByAliasUseCase;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,5 +20,3 @@ final class RedirectController extends AbstractController
         return $this->redirect($url);
     }
 }
-
-// TODO: переписать findByAlias на findActiveByAlias

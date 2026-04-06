@@ -5,6 +5,7 @@ namespace App\Application\User\Action;
 use App\Application\User\Domain\Entity\User;
 use App\Application\User\Domain\Exception\UserNotFoundException;
 use App\Application\User\Domain\Repository\UserRepositoryInterface;
+use App\Application\User\Domain\ValueObject\Email;
 
 final readonly class GetUserByEmailAction
 {
@@ -13,7 +14,7 @@ final readonly class GetUserByEmailAction
     ) {
     }
 
-    public function run(string $email): User
+    public function run(Email $email): User
     {
         $user = $this->userRepository->findByEmail($email);
 
