@@ -1,0 +1,14 @@
+App\Application\User\Domain\Request\LoginRequest:
+    properties:
+        email:
+            - NotBlank: ~
+            - Type: App\Application\User\Domain\ValueObject\Email
+
+App\Application\User\Domain\Request\RegisterRequest:
+    properties:
+        email:
+            - NotBlank: ~
+            - Type: App\Application\User\Domain\ValueObject\Email
+        password:
+            - NotBlank: ~
+            - Type: App\Application\User\Domain\ValueObject\Password

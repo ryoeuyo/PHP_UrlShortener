@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Persistence\Mapper;
 
 use App\Application\User\Domain\Entity\User as DomainUser;
+use App\Application\User\Domain\ValueObject\Email;
 use App\Infrastructure\Persistence\Entity\User as DoctrineUser;
 use Symfony\Component\Uid\Uuid;
 
@@ -12,7 +13,7 @@ final readonly class UserMapper
     {
         return new DomainUser(
             id: $domain->getId()?->toString(),
-            email: $domain->getEmail(),
+            email: Email::fromString($domain->getEmail()),
             password: $domain->getPassword(),
         );
     }
@@ -21,7 +22,7 @@ final readonly class UserMapper
     {
         $entity
             ->setId(Uuid::fromString($domain->id))
-            ->setEmail($domain->email)
+            ->setEmail($domain->email->value)
             ->setPassword($domain->password);
 
         return $entity;

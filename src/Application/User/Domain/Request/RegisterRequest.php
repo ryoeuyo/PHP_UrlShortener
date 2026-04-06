@@ -2,11 +2,14 @@
 
 namespace App\Application\User\Domain\Request;
 
+use App\Application\User\Domain\ValueObject\Email;
+use App\Application\User\Domain\ValueObject\Password;
+
 final readonly class RegisterRequest
 {
     public function __construct(
-        public string $email,
-        public string $password,
+        public Email $email,
+        public Password $password,
     ) {
     }
 }

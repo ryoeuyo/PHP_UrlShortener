@@ -4,6 +4,7 @@ namespace App\Application\User\Assert;
 
 use App\Application\User\Domain\Exception\UserAlreadyExistsException;
 use App\Application\User\Domain\Repository\UserRepositoryInterface;
+use App\Application\User\Domain\ValueObject\Email;
 
 final readonly class UserNotExistsByEmailAssert
 {
@@ -12,7 +13,7 @@ final readonly class UserNotExistsByEmailAssert
     ) {
     }
 
-    public function run(string $email): void
+    public function run(Email $email): void
     {
         $user = $this->userRepository->findByEmail($email);
 

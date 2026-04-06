@@ -16,7 +16,7 @@ final readonly class UserCreatedResponse
     {
         return new self(
             uuid: $user->id,
-            email: $user->email
+            email: $user->email->value,
         );
     }
 }

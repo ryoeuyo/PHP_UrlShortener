@@ -1,0 +1,11 @@
+App\Application\ShortenUrl\Domain\Request\CreateShortenUrlRequest:
+    properties:
+        url:
+            - NotBlank: ~
+            - Type: App\Application\ShortenUrl\Domain\ValueObject\Url
+        ttlSeconds:
+            - NotBlank: ~
+            - Type: integer
+            - Range:
+                  min: 360
+                  max: 3600

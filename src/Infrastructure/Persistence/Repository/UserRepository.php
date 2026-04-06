@@ -4,6 +4,7 @@ namespace App\Infrastructure\Persistence\Repository;
 
 use App\Application\User\Domain\Entity\User as DomainUser;
 use App\Application\User\Domain\Repository\UserRepositoryInterface;
+use App\Application\User\Domain\ValueObject\Email;
 use App\Infrastructure\Persistence\Entity\User as DoctrineUser;
 use App\Infrastructure\Persistence\Mapper\UserMapper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -46,9 +47,9 @@ final class UserRepository extends ServiceEntityRepository implements UserReposi
         return $this->mapper->toDomain($entity);
     }
 
-    public function findByEmail(string $email): ?DomainUser
+    public function findByEmail(Email $email): ?DomainUser
     {
-        $entity = $this->findOneBy(['email' => $email]);
+        $entity = $this->findOneBy(['email' => $email->value]);
 
         return $entity ? $this->mapper->toDomain($entity) : null;
     }

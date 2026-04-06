@@ -50,7 +50,7 @@ final class ShortenUrlRepository extends ServiceEntityRepository implements Shor
     {
         $entity = $this->createQueryBuilder('su')
             ->where('su.alias = :alias')
-            ->andWhere('su.expiredAt <= :now')
+            ->andWhere('su.expiredAt > :now')
             ->setParameter('alias', $alias)
             ->setParameter('now', new DateTimeImmutable())
             ->getQuery()
