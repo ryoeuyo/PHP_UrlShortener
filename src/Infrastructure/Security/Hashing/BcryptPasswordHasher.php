@@ -5,7 +5,7 @@ namespace App\Infrastructure\Security\Hashing;
 use App\Application\Common\Domain\Security\PasswordHasherInterface;
 use App\Application\User\Domain\ValueObject\Password;
 
-final readonly class PasswordHasher implements PasswordHasherInterface
+final readonly class BcryptPasswordHasher implements PasswordHasherInterface
 {
 
     public function hash(Password $password): string

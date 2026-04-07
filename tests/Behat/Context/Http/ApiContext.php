@@ -1,17 +1,16 @@
 <?php
 
-namespace Tests\Behat\Context;
+namespace Tests\Behat\Context\Http;
 
-use Behat\Behat\Context\Context;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Uid\Uuid;
-use Tests\Behat\Exception\TestFailException;
+use Tests\Behat\Context\BaseContext;
 use Tests\Behat\State\ScenarioState;
 
-class ApiContext implements Context
+class ApiContext extends BaseContext
 {
     private const CONTENT_TYPE = 'application/json';
     private const HTTP_ACCEPT = 'application/json';
@@ -42,7 +41,7 @@ class ApiContext implements Context
         $response = $this->client->getResponse();
 
         $this->state->statusCode = $response->getStatusCode();
-        $this->state->headers = $response->getHeaders();
+        $this->state->headers = $response->headers->all();
         $this->state->responseJson = json_decode($response->getContent(), true);
     }
 
@@ -62,7 +61,7 @@ class ApiContext implements Context
     #[Then('ответ должен содержать поле :field со значением :value')]
     public function assertResponseField(string $field, string $expected): void
     {
-        $actual = $this->state->responseJson[$field] ?? null;
+        $actual = $this->getResponseJsonField($field);
 
         if ((string) $actual !== $expected) {
             $this->fail(sprintf(
@@ -77,7 +76,7 @@ class ApiContext implements Context
     #[Then('ответ должен содержать поле :field')]
     public function assertResponseHasField(string $field): void
     {
-        $actual = $this->state->responseJson[$field] ?? null;
+        $actual = $this->getResponseJsonField($field);
 
         if ($actual === null) {
             $this->fail(sprintf(
@@ -90,9 +89,9 @@ class ApiContext implements Context
     #[Then('ответ должен содержать поле :field с валидным UUIDv4')]
     public function assertResponseFieldIsValidUuidV4(string $field): void
     {
-        $actual = $this->state->responseJson[$field] ?? null;
+        $actual = $this->getResponseJsonField($field);
 
-        if (Uuid::isValid($actual) !== false) {
+        if (Uuid::isValid($actual) === false) {
             $this->fail(sprintf(
                 'Поле "%s" не содержит валидный UUIDv4. Получено: %s',
                 $field,
@@ -101,8 +100,10 @@ class ApiContext implements Context
         }
     }
 
-    protected function fail(string $message): never
+    private function getResponseJsonField(string $field): ?string
     {
-        throw new TestFailException($message);
+        return $this->state->responseJson[$field]
+            ?? $this->state->responseJson['data'][$field]
+            ?? null;
     }
 }
