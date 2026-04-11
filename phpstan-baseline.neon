@@ -7,6 +7,24 @@ parameters:
 			path: src/Presentation/Http/Resolver/CurrentUserValueResolver.php
 
 		-
+			message: '#^Parameter \#1 \$json of function json_decode expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/Behat/Context/Http/ApiContext.php
+
+		-
+			message: '#^Parameter \$content of method Symfony\\Component\\BrowserKit\\AbstractBrowser\<Symfony\\Component\\HttpFoundation\\Request,Symfony\\Component\\HttpFoundation\\Response\>\:\:request\(\) expects string\|null, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Behat/Context/Http/ApiContext.php
+
+		-
+			message: '#^Property Tests\\Behat\\State\\ScenarioState\:\:\$headers \(array\<string\>\) does not accept array\<string, list\<string\|null\>\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/Behat/Context/Http/ApiContext.php
+
+		-
 			message: '#^Call to function method_exists\(\) with ''Symfony\\\\Component\\\\Dotenv\\\\Dotenv'' and ''bootEnv'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1

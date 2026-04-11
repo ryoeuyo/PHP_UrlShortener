@@ -8,8 +8,16 @@ namespace Tests\Behat\State;
 final class ScenarioState
 {
     public ?string $responseContent = null;
+
+    /**
+     * @var array<string, mixed>|null
+     */
     public ?array $responseJson = null;
     public ?int $statusCode = null;
+
+    /**
+     * @var string[]
+     */
     public array $headers = [];
     public ?string $token = null;
 }

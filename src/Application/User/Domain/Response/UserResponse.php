@@ -16,7 +16,7 @@ final readonly class UserResponse
     {
         return new self(
             id: $user->id,
-            email: $user->email,
+            email: $user->email->value,
         );
     }
 }
