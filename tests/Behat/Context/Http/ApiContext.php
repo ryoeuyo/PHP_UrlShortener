@@ -2,6 +2,7 @@
 
 namespace Tests\Behat\Context\Http;
 
+use Behat\Step\Given;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -98,6 +99,32 @@ class ApiContext extends BaseContext
                 $actual
             ));
         }
+    }
+
+    #[Given('я авторизован как пользователь с email :email и паролем :password')]
+    public function iAmAuthorized(string $email, string $password): void
+    {
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/auth/login',
+            server: [
+                'CONTENT_TYPE' => 'application/json',
+                'HTTP_ACCEPT' => 'application/json',
+            ],
+            content: json_encode([
+                'email' => $email,
+                'password' => $password,
+            ]),
+        );
+
+        $response = $this->client->getResponse();
+        $data = json_decode($response->getContent(), true);
+
+        if (!isset($data['data']['accessToken'])) {
+            $this->fail('JWT токен не получен');
+        }
+
+        $this->state->headers['HTTP_AUTHORIZATION'] = 'Bearer ' . $data['data']['accessToken'];
     }
 
     private function getResponseJsonField(string $field): ?string

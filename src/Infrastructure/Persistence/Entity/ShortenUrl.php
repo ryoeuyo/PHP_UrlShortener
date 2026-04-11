@@ -24,9 +24,6 @@ class ShortenUrl
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     private User $user;
 
-    #[ORM\Column(name: 'clicks', type: 'integer')]
-    private int $clicks;
-
     #[ORM\Column(name: 'created_at', type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
@@ -101,18 +98,6 @@ class ShortenUrl
     public function setExpiredAt(DateTimeImmutable $expiredAt): self
     {
         $this->expiredAt = $expiredAt;
-
-        return $this;
-    }
-
-    public function getClicks(): int
-    {
-        return $this->clicks;
-    }
-
-    public function setClicks(int $clicks): self
-    {
-        $this->clicks = $clicks;
 
         return $this;
     }

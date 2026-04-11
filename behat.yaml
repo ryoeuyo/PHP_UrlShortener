@@ -9,6 +9,7 @@ default:
             contexts:
                 - Tests\Behat\Context\Database\DatabaseContext
                 - Tests\Behat\Context\Http\ApiContext
+                - Tests\Behat\Context\User\UserContext
 
     autoload:
         '': tests/Behat

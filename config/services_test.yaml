@@ -4,7 +4,7 @@ services:
         autoconfigure: true
 
     Tests\Behat\:
-        resource: 'Tests\Behat\Context\*'
+        resource: '../tests/Behat/'
         tags: ['behat.context']
 
     Tests\Behat\State\ScenarioState:
