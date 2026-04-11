@@ -32,7 +32,6 @@ final readonly class CreateShortenUrlUseCase
             originalUrl: $request->url,
             alias: $this->generateUniqueAliasAction->run(),
             userId: $user->id,
-            clicks: 0,
             createdAt: $now,
             expiredAt: $now->add(
                 new DateInterval("PT{$request->ttlSeconds}S")

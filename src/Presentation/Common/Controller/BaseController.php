@@ -18,8 +18,12 @@ abstract class BaseController extends AbstractController
     /**
      * @param null|array<string, array<int, string>>|array<string, string> $errors
      */
-    protected function error(string $message, ?array $errors = null, mixed $data = null, int $status = 400): JsonResponse
-    {
+    protected function error(
+        string $message,
+        ?array $errors = null,
+        mixed $data = null,
+        int $status = 400,
+    ): JsonResponse {
         $response = ApiResponse::error($message, $errors, $data);
 
         return $this->json($response, $status);

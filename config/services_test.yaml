@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Tests\Behat\:
+        resource: '../tests/Behat/'
+        tags: ['behat.context']
+
+    Tests\Behat\State\ScenarioState:
+        public: true
+
+    Tests\Behat\Context\Http\ApiContext:
+        public: true
+        arguments:
+            $state: '@Tests\Behat\State\ScenarioState'
+
+    Tests\Behat\Context\Database\DatabaseContext:
+        public: true
+        arguments:
+            $connection: '@doctrine.dbal.default_connection'

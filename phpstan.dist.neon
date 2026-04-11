@@ -3,7 +3,7 @@ includes:
 
 services:
     -
-        class: App\Tests\Architecture\ArchitectureTest
+        class: Tests\Architecture\ArchitectureTest
         tags:
             - phpat.test
 

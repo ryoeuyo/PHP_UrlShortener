@@ -6,7 +6,7 @@ use App\Application\User\Domain\Request\LoginRequest;
 use App\Application\User\Domain\Request\RegisterRequest;
 use App\Application\User\UseCase\LoginUserUseCase;
 use App\Application\User\UseCase\RegisterUserUseCase;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Presentation\Common\Controller\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
 #[Route('/auth', name: 'auth')]
-final class AuthController extends AbstractController
+final class AuthController extends BaseController
 {
     #[Route('/login', name: 'login', methods: ['POST'])]
     public function login(
@@ -23,7 +23,7 @@ final class AuthController extends AbstractController
     ): JsonResponse {
         $response = $uc->run($request);
 
-        return $this->json($response);
+        return $this->success($response);
     }
 
     #[Route('/register', name: 'register', methods: ['POST'])]
@@ -33,6 +33,6 @@ final class AuthController extends AbstractController
     ): JsonResponse {
         $response = $uc->run($request);
 
-        return $this->json($response);
+        return $this->success($response);
     }
 }

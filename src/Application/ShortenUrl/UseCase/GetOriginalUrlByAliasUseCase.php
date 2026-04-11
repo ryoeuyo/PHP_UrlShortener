@@ -9,15 +9,12 @@ final readonly class GetOriginalUrlByAliasUseCase
 {
     public function __construct(
         private GetShortenUrlAction $getShortenUrlAction,
-        private ShortenUrlRepositoryInterface $shortenUrlRepository,
     ) {
     }
 
     public function run(string $alias): string
     {
         $shorten = $this->getShortenUrlAction->run($alias);
-
-        $shorten = $this->shortenUrlRepository->save($shorten->withIncrementedClicks());
 
         return $shorten->originalUrl->value;
     }

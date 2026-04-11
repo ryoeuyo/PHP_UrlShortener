@@ -1,0 +1,15 @@
+default:
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+            bootstrap: tests/bootstrap.php
+    suites:
+        default:
+            paths:
+                - tests/Behat/Features
+            contexts:
+                - Tests\Behat\Context\Database\DatabaseContext
+                - Tests\Behat\Context\Http\ApiContext
+                - Tests\Behat\Context\User\UserContext
+
+    autoload:
+        '': tests/Behat

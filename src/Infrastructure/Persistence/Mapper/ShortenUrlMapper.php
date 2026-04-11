@@ -22,7 +22,6 @@ final readonly class ShortenUrlMapper
             originalUrl: Url::fromString($shortenUrl->getOriginalUrl()),
             alias: $shortenUrl->getAlias(),
             userId: $shortenUrl->getUser()->getId(),
-            clicks: $shortenUrl->getClicks(),
             createdAt: $shortenUrl->getCreatedAt(),
             expiredAt: $shortenUrl->getExpiredAt(),
         );
@@ -37,7 +36,6 @@ final readonly class ShortenUrlMapper
             ->setOriginalUrl($domain->originalUrl->value)
             ->setAlias($domain->alias)
             ->setUser($this->entityManager->getReference(User::class, $domain->userId))
-            ->setClicks($domain->clicks)
             ->setCreatedAt($domain->createdAt)
             ->setExpiredAt($domain->expiredAt);
     }

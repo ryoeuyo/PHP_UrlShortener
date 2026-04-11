@@ -7,13 +7,16 @@ use DomainException;
 final class ValidationException extends DomainException
 {
     /**
-     * @param array<string, string> $violations
+     * @param string[] $violations
      */
     public function __construct(private readonly array $violations)
     {
         parent::__construct('Validation failed');
     }
 
+    /**
+     * @return string[]
+     */
     public function getViolations(): array
     {
         return $this->violations;
