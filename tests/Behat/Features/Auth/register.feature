@@ -43,8 +43,8 @@
         Тогда я отправляю POST запрос на "/api/auth/register" с JSON:
         """
         {
-            "email": " "email@example.com"",
-            "password": ""tEst11234?"
+            "email": "email@example.com",
+            "password": "tEst11234?"
         }
         """
         Тогда код ответа должен быть 400
