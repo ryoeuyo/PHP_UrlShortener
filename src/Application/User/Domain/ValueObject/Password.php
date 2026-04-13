@@ -28,5 +28,4 @@ final readonly class Password implements StringValueObjectInterface
 
         return new self($value);
     }
-
 }

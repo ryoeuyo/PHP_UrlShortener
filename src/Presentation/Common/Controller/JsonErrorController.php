@@ -8,9 +8,9 @@ use Exception;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Throwable;
+use ValueError;
 
 final class JsonErrorController extends BaseController
 {
@@ -39,7 +39,7 @@ final class JsonErrorController extends BaseController
             );
         }
 
-        if (get_class($exception) === "ValueError") {
+        if (is_a($exception, ValueError::class)) {
             return $this->internalError();
         }
 
