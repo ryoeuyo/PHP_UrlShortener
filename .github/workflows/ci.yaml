@@ -13,6 +13,9 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4
 
+            - name: Prepare .env
+              run: cp .env.example .env
+
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
@@ -36,6 +39,9 @@ jobs:
 
         steps:
             - uses: actions/checkout@v4
+
+            - name: Prepare .env
+              run: cp .env.example .env
 
             - uses: shivammathur/setup-php@v2
               with:
@@ -76,6 +82,9 @@ jobs:
 
         steps:
             - uses: actions/checkout@v4
+
+            - name: Prepare .env
+              run: cp .env.example .env
 
             - uses: shivammathur/setup-php@v2
               with:
@@ -121,6 +130,9 @@ jobs:
 
         steps:
             - uses: actions/checkout@v4
+
+            - name: Prepare .env
+              run: cp .env.example .env
 
             - uses: shivammathur/setup-php@v2
               with:
