@@ -3,7 +3,6 @@
 namespace App\Application\ShortenUrl\UseCase;
 
 use App\Application\ShortenUrl\Action\GetShortenUrlAction;
-use App\Application\ShortenUrl\Domain\Repository\ShortenUrlRepositoryInterface;
 
 final readonly class GetOriginalUrlByAliasUseCase
 {

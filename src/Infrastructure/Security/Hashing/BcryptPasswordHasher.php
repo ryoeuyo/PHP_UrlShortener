@@ -7,7 +7,6 @@ use App\Application\User\Domain\ValueObject\Password;
 
 final readonly class BcryptPasswordHasher implements PasswordHasherInterface
 {
-
     public function hash(Password $password): string
     {
         return password_hash($password->value, PASSWORD_BCRYPT);

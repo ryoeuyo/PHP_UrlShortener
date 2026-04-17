@@ -77,10 +77,12 @@
     "require-dev": {
         "behat/behat": ">=3.30",
         "friends-of-behat/symfony-extension": ">=2.6.2",
+        "friendsofphp/php-cs-fixer": "^3.95",
         "phpat/phpat": "^0.12.4",
         "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan": "^2.1.46",
+        "phpstan/phpstan": "^2.1.50",
         "phpunit/phpunit": "^11.5.55",
+        "squizlabs/php_codesniffer": "^4.0.1",
         "symfony/browser-kit": "7.4.*",
         "symfony/css-selector": "7.4.*"
     }

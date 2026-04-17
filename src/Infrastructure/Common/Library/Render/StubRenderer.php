@@ -13,9 +13,6 @@ final readonly class StubRenderer implements TemplateRendererInterface
     ) {
     }
 
-    /**
-     * @inheritDoc
-     */
     public function render(string $template, array $parameters = []): string
     {
         $templatePath = sprintf('%s/templates/stubs/%s', $this->projectDir, $template);

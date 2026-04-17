@@ -9,5 +9,5 @@ final class InvalidCredentials extends DomainException
     /**
      * @var string
      */
-    protected $message = "Invalid credentials";
+    protected $message = 'Invalid credentials';
 }

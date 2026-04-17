@@ -3,8 +3,8 @@
 namespace Tests\Behat\State;
 
 /**
- * Класс "состояние", для хранения данных между "шагами" behat теста
-  */
+ * Класс "состояние", для хранения данных между "шагами" behat теста.
+ */
 final class ScenarioState
 {
     public ?string $responseContent = null;

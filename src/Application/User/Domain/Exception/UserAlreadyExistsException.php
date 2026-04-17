@@ -9,5 +9,5 @@ final class UserAlreadyExistsException extends DomainException
     /**
      * @var string
      */
-    protected $message = "User already exists";
+    protected $message = 'User already exists';
 }

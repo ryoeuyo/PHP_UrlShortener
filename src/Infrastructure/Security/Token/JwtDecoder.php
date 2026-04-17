@@ -17,9 +17,6 @@ final readonly class JwtDecoder implements TokenDecoderInterface
     ) {
     }
 
-    /**
-     * @inheritDoc
-     */
     public function decode(string $token): array
     {
         try {

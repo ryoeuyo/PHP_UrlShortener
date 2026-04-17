@@ -43,6 +43,7 @@ final class MakePolicyCommand extends Command
 
         if ($this->fs->exists($filePath)) {
             $output->writeln('<error>Policy already exists</error>');
+
             return Command::FAILURE;
         }
 

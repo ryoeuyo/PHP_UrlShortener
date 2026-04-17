@@ -5,17 +5,16 @@ namespace App\Presentation\Common\Response;
 final readonly class ApiResponse
 {
     /**
-     * @param null|array<mixed| string> $errors
+     * @param array<mixed| string>|null $errors
      */
     public function __construct(
         public string $status,
         public mixed $data = null,
         public ?string $message = null,
         public ?array $errors = null,
-        public ?string $timestamp = null
+        public ?string $timestamp = null,
     ) {
     }
-
 
     public static function success(
         mixed $data = null,
@@ -31,7 +30,7 @@ final readonly class ApiResponse
     }
 
     /**
-     * @param null|array<mixed| string> $errors
+     * @param array<mixed| string>|null $errors
      */
     public static function error(string $message, ?array $errors = null, mixed $data = null): self
     {

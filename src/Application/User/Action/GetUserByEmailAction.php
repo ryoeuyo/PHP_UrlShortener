@@ -10,7 +10,7 @@ use App\Application\User\Domain\ValueObject\Email;
 final readonly class GetUserByEmailAction
 {
     public function __construct(
-        private UserRepositoryInterface $userRepository
+        private UserRepositoryInterface $userRepository,
     ) {
     }
 

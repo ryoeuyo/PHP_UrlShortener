@@ -8,11 +8,11 @@ use Throwable;
 abstract class NotFoundException extends DomainException
 {
     public function __construct(
-        string $message = "",
+        string $message = '',
         int $code = 0,
-        ?Throwable $previous = null
+        ?Throwable $previous = null,
     ) {
-        if ($message === "") {
+        if ($message === '') {
             $message = sprintf('%s not found', $this->entity());
         }
 
