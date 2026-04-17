@@ -31,7 +31,7 @@ final class StringValueObjectDenormalizer implements DenormalizerInterface
             throw new NotNormalizableValueException(sprintf('%s must be a string', $type));
         }
 
-        /** @var class-string<StringValueObjectInterface> $type */
+        /* @var class-string<StringValueObjectInterface> $type */
         return $type::fromString(
             trim($data),
         );

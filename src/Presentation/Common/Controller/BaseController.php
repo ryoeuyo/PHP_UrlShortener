@@ -12,11 +12,11 @@ abstract class BaseController extends AbstractController
     {
         $response = ApiResponse::success($data, $message);
 
-        return $this->json($response, $status, []);
+        return $this->json($response, $status);
     }
 
     /**
-     * @param null|array<string, array<int, string>>|array<string, string> $errors
+     * @param array<string, array<int, string>>|array<string, string>|null $errors
      */
     protected function error(
         string $message,
@@ -63,5 +63,4 @@ abstract class BaseController extends AbstractController
 
         return $this->json($response, 500);
     }
-
 }

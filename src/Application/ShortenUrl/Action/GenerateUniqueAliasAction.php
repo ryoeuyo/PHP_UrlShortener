@@ -4,7 +4,6 @@ namespace App\Application\ShortenUrl\Action;
 
 use App\Application\ShortenUrl\Assert\ShortenUrlNotExistsByAliasAssert;
 use App\Application\ShortenUrl\Domain\Exception\ShortenUrlAlreadyExistsException;
-use Random\RandomException;
 use Symfony\Component\String\ByteString;
 
 final readonly class GenerateUniqueAliasAction
@@ -13,13 +12,10 @@ final readonly class GenerateUniqueAliasAction
 
     public function __construct(
         private int $length,
-        private ShortenUrlNotExistsByAliasAssert $shortenUrlNotExistsByAliasAssert
+        private ShortenUrlNotExistsByAliasAssert $shortenUrlNotExistsByAliasAssert,
     ) {
     }
 
-    /**
-     * @throws RandomException
-     */
     public function run(): string
     {
         $tries = self::GENERATE_ALIAS_TRIES;
@@ -29,7 +25,7 @@ final readonly class GenerateUniqueAliasAction
                 $this->shortenUrlNotExistsByAliasAssert->assert($alias);
 
                 return $alias;
-            } catch (ShortenUrlAlreadyExistsException $e) {
+            } catch (ShortenUrlAlreadyExistsException) {
             }
         }
 

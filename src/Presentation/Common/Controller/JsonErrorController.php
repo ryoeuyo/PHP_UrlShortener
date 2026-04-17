@@ -3,6 +3,7 @@
 namespace App\Presentation\Common\Controller;
 
 use App\Application\Common\Domain\Exception\NotFoundException;
+use App\Application\Common\Domain\Exception\UnauthorizedException;
 use App\Application\Common\Domain\Exception\ValidationException;
 use Exception;
 use RuntimeException;
@@ -39,6 +40,10 @@ final class JsonErrorController extends BaseController
             );
         }
 
+        if ($exception instanceof UnauthorizedException) {
+            return $this->unauthorized($message);
+        }
+
         if (is_a($exception, ValueError::class)) {
             return $this->internalError();
         }
@@ -52,6 +57,5 @@ final class JsonErrorController extends BaseController
         }
 
         return $this->internalError($message);
-
     }
 }

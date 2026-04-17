@@ -3,7 +3,6 @@
 namespace App\Application\ShortenUrl\Domain\Response;
 
 use App\Application\ShortenUrl\Domain\Entity\ShortenUrl;
-use DateTimeImmutable;
 
 final readonly class ShortenUrlResponse
 {
@@ -21,7 +20,7 @@ final readonly class ShortenUrlResponse
             alias: $shortenUrl->alias,
             originalUrl: $shortenUrl->originalUrl->value,
             userId: $shortenUrl->userId,
-            expiredAt: $shortenUrl->expiredAt->format("Y-m-d H:i:s.u"),
+            expiredAt: $shortenUrl->expiredAt->format('Y-m-d H:i:s.u'),
         );
     }
 }

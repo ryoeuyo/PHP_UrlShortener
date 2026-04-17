@@ -41,10 +41,6 @@ final readonly class GetUserFromTokenAction
 
     private function throwUnauthorizedHttpExceptionWithBearerChallenge(string $message): never
     {
-        throw new UnauthorizedHttpException(
-            challenge: 'Bearer',
-            message: $message,
-            code: 401
-        );
+        throw new UnauthorizedHttpException(challenge: 'Bearer', message: $message, code: 401);
     }
 }
