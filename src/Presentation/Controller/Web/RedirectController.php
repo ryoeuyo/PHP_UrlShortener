@@ -2,7 +2,6 @@
 
 namespace App\Presentation\Controller\Web;
 
-use App\Application\Common\Domain\ValueObject\Pagination;
 use App\Application\ShortenUrl\Domain\Request\ShortenUrlClickRequest;
 use App\Application\ShortenUrl\UseCase\GetOriginalUrlByAliasUseCase;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
