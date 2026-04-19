@@ -12,6 +12,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<DoctrineShortenUrlClick>
+ */
 final class ShortenUrlClickRepository extends ServiceEntityRepository implements ShortenUrlClickRepositoryInterface
 {
     private EntityManagerInterface $entityManager;
@@ -27,7 +30,7 @@ final class ShortenUrlClickRepository extends ServiceEntityRepository implements
 
     public function save(DomainShortenUrlClick $click): DomainShortenUrlClick
     {
-        $entity = $this->findBy(['id' => $click->id]);
+        $entity = $this->findOneBy(['id' => $click->id]);
         $isNew = !$entity;
 
         if ($isNew) {
