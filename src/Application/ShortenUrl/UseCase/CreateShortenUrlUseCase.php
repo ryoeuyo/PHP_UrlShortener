@@ -10,7 +10,6 @@ use App\Application\ShortenUrl\Domain\Response\ShortenUrlResponse;
 use App\Application\User\Domain\Entity\User;
 use DateInterval;
 use DateTimeImmutable;
-use Random\RandomException;
 
 final readonly class CreateShortenUrlUseCase
 {
@@ -20,9 +19,6 @@ final readonly class CreateShortenUrlUseCase
     ) {
     }
 
-    /**
-     * @throws RandomException
-     */
     public function run(CreateShortenUrlRequest $request, User $user): ShortenUrlResponse
     {
         $now = new DateTimeImmutable();

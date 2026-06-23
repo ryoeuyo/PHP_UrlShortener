@@ -14,18 +14,20 @@ RUN apk add --no-cache \
     zip \
     unzip
 
-# Install PHP extensions
-RUN docker-php-ext-configure gd \
-    --with-freetype \
-    --with-jpeg && \
-    docker-php-ext-install \
-    pdo \
-    pdo_pgsql \
-    mbstring \
-    exif \
-    pcntl \
-    bcmath \
-    gd
+# Dev-заголовки + тулчейн — только на время компиляции, потом del
+RUN apk add --no-cache --virtual .build-deps \
+        $PHPIZE_DEPS \
+        libpng-dev \
+        libjpeg-turbo-dev \
+        freetype-dev \
+        oniguruma-dev \
+        libxml2-dev \
+        postgresql-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd \
+    && pecl install redis igbinary \
+    && docker-php-ext-enable igbinary redis \
+    && apk del .build-deps
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
