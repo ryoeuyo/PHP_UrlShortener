@@ -37,3 +37,6 @@ services:
     App\Application\ShortenUrl\Action\GenerateUniqueAliasAction:
         arguments:
             $length: 5
+
+    App\Application\ShortenUrl\Domain\Repository\ShortenUrlRepositoryInterface:
+        '@App\Infrastructure\Persistence\Repository\ShortenUrlRepository'

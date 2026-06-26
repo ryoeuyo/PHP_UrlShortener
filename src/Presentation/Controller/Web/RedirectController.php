@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/r', name: 'redirect')]
 final class RedirectController extends AbstractController
 {
-    #[Route('/{alias}', name: 'redirect', methods: ['GET'])]
+    #[Route('/{alias}', methods: ['GET'])]
     public function redirectByAlias(
         string $alias,
         GetOriginalUrlByAliasUseCase $uc,

@@ -2,9 +2,9 @@
 
 namespace App\Application\ShortenUrl\Action;
 
+use App\Application\Common\Domain\Util\RandomStringProviderInterface;
 use App\Application\ShortenUrl\Assert\ShortenUrlNotExistsByAliasAssert;
 use App\Application\ShortenUrl\Domain\Exception\ShortenUrlAlreadyExistsException;
-use Symfony\Component\String\ByteString;
 
 final readonly class GenerateUniqueAliasAction
 {
@@ -13,15 +13,17 @@ final readonly class GenerateUniqueAliasAction
     public function __construct(
         private int $length,
         private ShortenUrlNotExistsByAliasAssert $shortenUrlNotExistsByAliasAssert,
+        private RandomStringProviderInterface $randomStringProvider,
     ) {
     }
 
     public function run(): string
     {
         $tries = self::GENERATE_ALIAS_TRIES;
+
         while ($tries--) {
             try {
-                $alias = ByteString::fromRandom($this->length)->toString();
+                $alias = $this->randomStringProvider->provide($this->length);
                 $this->shortenUrlNotExistsByAliasAssert->assert($alias);
 
                 return $alias;
