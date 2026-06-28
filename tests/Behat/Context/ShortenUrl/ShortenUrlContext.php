@@ -37,7 +37,7 @@ final class ShortenUrlContext extends BaseContext
                 'HTTP_ACCEPT' => self::HTTP_ACCEPT,
                 ...$this->state->headers,
             ],
-            content: json_encode(['url' => $url, 'ttlSeconds' => 3600]),
+            content: (string)json_encode(['url' => $url, 'ttlSeconds' => 3600]),
         );
 
         $response = $this->client->getResponse();
