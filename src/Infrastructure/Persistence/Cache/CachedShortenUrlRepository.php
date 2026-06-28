@@ -56,4 +56,9 @@ final readonly class CachedShortenUrlRepository implements ShortenUrlRepositoryI
     {
         return self::KEY_PREFIX . $alias;
     }
+
+    public function totalUrlsCountByUserId(string $userId): int
+    {
+        return $this->inner->totalUrlsCountByUserId($userId);
+    }
 }

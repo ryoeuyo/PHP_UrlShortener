@@ -51,13 +51,38 @@ final class ShortenUrlContext extends BaseContext
         }
 
         $data = json_decode((string) $response->getContent(), true);
-        $alias = is_array($data) ? ($data['alias'] ?? $data['data']['alias'] ?? null) : null;
+        $url = is_array($data) ? ($data['url'] ?? $data['data']['url'] ?? null) : null;
 
-        if (!is_string($alias)) {
-            $this->fail('Alias отсутствует в ответе создания короткой ссылки');
+        if (!is_string($url)) {
+            $this->fail('Поле "url" отсутствует в ответе создания короткой ссылки');
+        }
+
+        $alias = $this->extractAlias($url);
+
+        if ($alias === null) {
+            $this->fail(sprintf('Не удалось извлечь alias из url "%s"', $url));
         }
 
         $this->state->lastAlias = $alias;
+    }
+
+    #[Then('поле :field в ответе должно быть готовой короткой ссылкой')]
+    public function assertFieldIsShortLink(string $field): void
+    {
+        $data = $this->state->responseJson;
+        $value = is_array($data) ? ($data[$field] ?? $data['data'][$field] ?? null) : null;
+
+        if (!is_string($value)) {
+            $this->fail(sprintf('Поле "%s" отсутствует в ответе', $field));
+        }
+
+        if (!str_contains($value, '://') || $this->extractAlias($value) === null) {
+            $this->fail(sprintf(
+                'Поле "%s" не содержит готовую короткую ссылку. Получено: %s',
+                $field,
+                $value,
+            ));
+        }
     }
 
     #[When('я перехожу по короткой ссылке')]
@@ -123,6 +148,14 @@ final class ShortenUrlContext extends BaseContext
                 $alias,
             ));
         }
+    }
+
+    private function extractAlias(string $url): ?string
+    {
+        $path = (string) parse_url($url, PHP_URL_PATH);
+        $alias = basename($path);
+
+        return $alias !== '' ? $alias : null;
     }
 
     private function resolveShortenId(string $alias): int

@@ -38,5 +38,9 @@ services:
         arguments:
             $length: 5
 
+    App\Infrastructure\Common\UrlProvider\ShortenUrlProvider:
+        arguments:
+            $defaultUrl: '%env(DEFAULT_URL)%'
+
     App\Application\ShortenUrl\Domain\Repository\ShortenUrlRepositoryInterface:
         '@App\Infrastructure\Persistence\Repository\ShortenUrlRepository'
