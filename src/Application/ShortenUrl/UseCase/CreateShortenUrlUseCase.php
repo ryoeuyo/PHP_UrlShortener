@@ -5,10 +5,10 @@ namespace App\Application\ShortenUrl\UseCase;
 use App\Application\ShortenUrl\Action\GenerateUniqueAliasAction;
 use App\Application\ShortenUrl\Assert\UserHasNotExceededLimitsAssert;
 use App\Application\ShortenUrl\Domain\Entity\ShortenUrl;
+use App\Application\ShortenUrl\Domain\Factory\UrlFetchedResponseFactory;
 use App\Application\ShortenUrl\Domain\Repository\ShortenUrlRepositoryInterface;
 use App\Application\ShortenUrl\Domain\Request\CreateShortenUrlRequest;
 use App\Application\ShortenUrl\Domain\Response\UrlFetchedResponse;
-use App\Application\ShortenUrl\Domain\UrlProvider\ShortenUrlProviderInterface;
 use App\Application\User\Domain\Entity\User;
 use DateInterval;
 use DateTimeImmutable;
@@ -19,7 +19,7 @@ final readonly class CreateShortenUrlUseCase
         private ShortenUrlRepositoryInterface $shortenUrlRepository,
         private UserHasNotExceededLimitsAssert $userHasNotExceededLimitsAssert,
         private GenerateUniqueAliasAction $generateUniqueAliasAction,
-        private ShortenUrlProviderInterface $shortenUrlProvider,
+        private UrlFetchedResponseFactory $urlFetchedResponseFactory,
     ) {
     }
 
@@ -39,9 +39,8 @@ final readonly class CreateShortenUrlUseCase
             ),
         );
 
-        return UrlFetchedResponse::fromEntity(
-            shortenUrl: $this->shortenUrlRepository->save($shortenUrl),
-            url: $this->shortenUrlProvider->provide($shortenUrl->alias),
-        );
+        $saved = $this->shortenUrlRepository->save($shortenUrl);
+
+        return $this->urlFetchedResponseFactory->fromEntity($saved);
     }
 }
