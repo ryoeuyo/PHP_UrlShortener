@@ -58,4 +58,16 @@ final class ShortenUrlRepository extends ServiceEntityRepository implements Shor
 
         return $entity ? $this->mapper->toDomain($entity) : null;
     }
+
+    public function totalUrlsCountByUserId(string $userId): int
+    {
+        return (int) $this->createQueryBuilder('su')
+            ->select('COUNT(su.id)')
+            ->where('su.user = :userId')
+            ->andWhere('su.expiredAt > :now')
+            ->setParameter('userId', $userId)
+            ->setParameter('now', new DateTimeImmutable())
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

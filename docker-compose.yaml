@@ -67,6 +67,14 @@ services:
     networks:
       - symfony
 
+  # web ui for db
+  adminer:
+    image: adminer:5.4.2
+    ports:
+      - 8888:8080
+    networks:
+      - symfony
+
 volumes:
   db_data:
   db_test_data:

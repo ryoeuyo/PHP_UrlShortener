@@ -9,4 +9,6 @@ interface ShortenUrlRepositoryInterface
     public function save(DomainShortenUrl $shortenUrl): DomainShortenUrl;
 
     public function findActiveByAlias(string $alias): ?DomainShortenUrl;
+
+    public function totalUrlsCountByUserId(string $userId): int;
 }
