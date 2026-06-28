@@ -4,7 +4,7 @@ namespace App\Application\ShortenUrl\Domain\Response;
 
 use App\Application\ShortenUrl\Domain\Entity\ShortenUrlClick;
 
-final readonly class ShortenUrlClickResponse
+final readonly class ShortenUrlClickFetchedResponse
 {
     public function __construct(
         public int $id,
@@ -12,7 +12,7 @@ final readonly class ShortenUrlClickResponse
     ) {
     }
 
-    public static function fromEntity(ShortenUrlClick $click): ShortenUrlClickResponse
+    public static function fromEntity(ShortenUrlClick $click): ShortenUrlClickFetchedResponse
     {
         return new self(
             id: $click->id,

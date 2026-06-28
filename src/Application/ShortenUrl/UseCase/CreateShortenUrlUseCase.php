@@ -6,7 +6,7 @@ use App\Application\ShortenUrl\Action\GenerateUniqueAliasAction;
 use App\Application\ShortenUrl\Domain\Entity\ShortenUrl;
 use App\Application\ShortenUrl\Domain\Repository\ShortenUrlRepositoryInterface;
 use App\Application\ShortenUrl\Domain\Request\CreateShortenUrlRequest;
-use App\Application\ShortenUrl\Domain\Response\ShortenUrlResponse;
+use App\Application\ShortenUrl\Domain\Response\UrlFetchedResponse;
 use App\Application\User\Domain\Entity\User;
 use DateInterval;
 use DateTimeImmutable;
@@ -19,7 +19,7 @@ final readonly class CreateShortenUrlUseCase
     ) {
     }
 
-    public function run(CreateShortenUrlRequest $request, User $user): ShortenUrlResponse
+    public function run(CreateShortenUrlRequest $request, User $user): UrlFetchedResponse
     {
         $now = new DateTimeImmutable();
 
@@ -34,7 +34,7 @@ final readonly class CreateShortenUrlUseCase
             ),
         );
 
-        return ShortenUrlResponse::fromEntity(
+        return UrlFetchedResponse::fromEntity(
             $this->shortenUrlRepository->save($shortenUrl),
         );
     }

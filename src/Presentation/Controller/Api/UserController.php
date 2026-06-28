@@ -3,7 +3,7 @@
 namespace App\Presentation\Controller\Api;
 
 use App\Application\User\Domain\Entity\User;
-use App\Application\User\Domain\Response\UserResponse;
+use App\Application\User\Domain\Response\UserFetchedResponse;
 use App\Infrastructure\Security\Attribute\CurrentUser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,7 +18,7 @@ final class UserController extends AbstractController
     public function me(
         #[CurrentUser] User $user,
     ): JsonResponse {
-        $response = UserResponse::fromEntity($user);
+        $response = UserFetchedResponse::fromEntity($user);
 
         return $this->json($response);
     }

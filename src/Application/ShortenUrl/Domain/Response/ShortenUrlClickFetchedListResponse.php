@@ -4,10 +4,10 @@ namespace App\Application\ShortenUrl\Domain\Response;
 
 use App\Application\ShortenUrl\Domain\Entity\ShortenUrlClick;
 
-final readonly class ShortenUrlClickListResponse
+final readonly class ShortenUrlClickFetchedListResponse
 {
     /**
-     * @param ShortenUrlClickResponse[] $items
+     * @param ShortenUrlClickFetchedResponse[] $items
      */
     public function __construct(
         public array $items,
@@ -22,7 +22,7 @@ final readonly class ShortenUrlClickListResponse
     {
         return new self(
             items: array_map(
-                fn (ShortenUrlClick $click): ShortenUrlClickResponse => ShortenUrlClickResponse::fromEntity($click),
+                fn (ShortenUrlClick $click): ShortenUrlClickFetchedResponse => ShortenUrlClickFetchedResponse::fromEntity($click),
                 $entities,
             ),
             total: $total
