@@ -20,4 +20,9 @@ final class ScenarioState
      */
     public array $headers = [];
     public ?string $token = null;
+
+    /**
+     * Alias последней созданной короткой ссылки (для шагов с кликами).
+     */
+    public ?string $lastAlias = null;
 }

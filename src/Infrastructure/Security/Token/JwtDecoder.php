@@ -20,9 +20,7 @@ final readonly class JwtDecoder implements TokenDecoderInterface
     public function decode(string $token): array
     {
         try {
-            $decoded = JWT::decode($token, new Key($this->secret, self::ALG));
-
-            return (array) $decoded;
+            return (array) JWT::decode($token, new Key($this->secret, self::ALG));
         } catch (Throwable) {
             throw new UnauthorizedException();
         }

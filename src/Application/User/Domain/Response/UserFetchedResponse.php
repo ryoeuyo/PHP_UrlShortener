@@ -4,7 +4,7 @@ namespace App\Application\User\Domain\Response;
 
 use App\Application\User\Domain\Entity\User;
 
-final readonly class UserResponse
+final readonly class UserFetchedResponse
 {
     public function __construct(
         public string $id,

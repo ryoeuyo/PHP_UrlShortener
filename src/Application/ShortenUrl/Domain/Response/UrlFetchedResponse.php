@@ -4,7 +4,7 @@ namespace App\Application\ShortenUrl\Domain\Response;
 
 use App\Application\ShortenUrl\Domain\Entity\ShortenUrl;
 
-final readonly class ShortenUrlResponse
+final readonly class UrlFetchedResponse
 {
     public function __construct(
         public string $alias,
